@@ -10,13 +10,13 @@ android {
     }
 
 
-    compileSdkVersion 19 // 22
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 22 // 22
+    buildToolsVersion "21.1.0"
 
     defaultConfig {
         applicationId "hk.ust.cse.hunkim.questionroom"
         minSdkVersion 18
-        targetSdkVersion 19 // 22
+        targetSdkVersion 22 // 22
         versionCode 1
         versionName "1.0"
     }
