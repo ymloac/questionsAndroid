@@ -92,12 +92,16 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
                 String modelName = dataSnapshot.getKey();
                 T oldModel = mModelKeys.get(modelName);
                 T newModel = dataSnapshot.getValue(FirebaseListAdapter.this.mModelClass);
-                int index = mModels.indexOf(oldModel);
 
                 // TOFIX: Any easy way to ser key?
                 setKey(modelName, newModel);
 
+
+                int index = mModels.indexOf(oldModel);
                 mModels.set(index, newModel);
+
+
+                // update map
                 mModelKeys.put(modelName, newModel);
 
                 notifyDataSetChanged();

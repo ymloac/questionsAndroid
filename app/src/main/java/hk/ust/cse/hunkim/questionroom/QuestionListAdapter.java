@@ -102,7 +102,7 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
         if (clickable) {
             echoButton.getBackground().setColorFilter(null);
         } else {
-            echoButton.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+            echoButton.getBackground().setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
         }
 
 

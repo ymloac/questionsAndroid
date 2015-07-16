@@ -171,4 +171,19 @@ public class Question implements Comparable<Question> {
         }
         return this.echo - other.echo;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Question)) {
+            return false;
+        }
+        Question other = (Question)o;
+        return key.equals(other.key);
+    }
+
+    @Override
+    public int hashCode() {
+        return key.hashCode();
+    }
 }
