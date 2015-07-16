@@ -52,7 +52,7 @@ public class MainActivity extends ListActivity {
 
         // Make it a bit more reliable
         roomName = intent.getStringExtra(JoinActivity.ROOM_NAME);
-        if (roomName == null || roomName.length()==0) {
+        if (roomName == null || roomName.length() == 0) {
             roomName = "all";
         }
 
@@ -88,11 +88,15 @@ public class MainActivity extends ListActivity {
     @Override
     public void onStart() {
         super.onStart();
+
         // Setup our view and list adapter. Ensure it scrolls to the bottom as data changes
         final ListView listView = getListView();
-        // Tell our list adapter that we only want 50 messages at a time
-        mChatListAdapter = new QuestionListAdapter(mFirebaseRef.limitToFirst(1000), this, R.layout.question, roomName);
+        // Tell our list adapter that we only want 200 messages at a time
+        mChatListAdapter = new QuestionListAdapter(
+                mFirebaseRef.orderByChild("echo").limitToFirst(200),
+                this, R.layout.question, roomName);
         listView.setAdapter(mChatListAdapter);
+
         mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {

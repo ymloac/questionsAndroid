@@ -51,8 +51,9 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
         this.mModelClass = mModelClass;
         this.mLayout = mLayout;
         mInflater = activity.getLayoutInflater();
-        mModels = new ArrayList<>();
-        mModelKeys = new HashMap<>();
+        mModels = new ArrayList<T>();
+        mModelKeys = new HashMap<String, T>();
+
         // Look for all child events. We will then map them to our own internal ArrayList, which backs ListView
         mListener = this.mRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -156,6 +157,7 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
         mModelKeys.clear();
     }
 
+
     @Override
     public int getCount() {
         return mModels.size();
@@ -181,13 +183,10 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
         // Let's order the list
         if (i == 0) {
             sortModels(mModels);
-            sortModels(mModels);
         }
 
         // Let's get keys and models
-
         T model = mModels.get(i);
-
 
         // Call out to subclass to marshall this model into the provided view
         populateView(view, model);

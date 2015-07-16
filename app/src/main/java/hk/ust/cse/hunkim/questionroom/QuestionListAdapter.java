@@ -19,7 +19,7 @@ import hk.ust.cse.hunkim.questionroom.question.Question;
 /**
  * @author greg
  * @since 6/21/13
- * <p>
+ * <p/>
  * This class is an example of how to use FirebaseListAdapter. It uses the <code>Chat</code> class to encapsulate the
  * data for each individual chat message
  */
@@ -112,7 +112,6 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
     @Override
     protected void sortModels(List<Question> mModels) {
         Collections.sort(mModels);
-
     }
 
     @Override
