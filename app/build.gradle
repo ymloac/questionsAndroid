@@ -9,13 +9,13 @@ android {
         exclude 'LICENSE.txt' // After adding the JUnit
     }
 
-    compileSdkVersion 22
+    compileSdkVersion 19 //22
     buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "hk.ust.cse.hunkim.questionroom"
         minSdkVersion 18
-        targetSdkVersion 22
+        targetSdkVersion 19 //22
         versionCode 1
         versionName "1.0"
     }
