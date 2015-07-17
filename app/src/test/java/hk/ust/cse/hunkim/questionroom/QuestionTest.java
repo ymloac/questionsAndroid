@@ -43,5 +43,9 @@ public class QuestionTest  extends TestCase {
         assertEquals("Head", "Hello?", q.getHead());
     }
 
+    public void testHead2() {
+        assertEquals("Head", "Hello??", q.getHead());
+    }
+
 
 }
