@@ -124,6 +124,8 @@ public class JoinActivityTest extends ActivityInstrumentationTestCase2<JoinActiv
 
         assertEquals("This is set correctly", "Room name: all", mainActivity.getTitle());
 
+        assertEquals("This is set correctly", "Room name: all!", mainActivity.getTitle());
+
         //Unregister monitor for ReceiverActivity
         getInstrumentation().removeMonitor(receiverActivityMonitor);
     }
