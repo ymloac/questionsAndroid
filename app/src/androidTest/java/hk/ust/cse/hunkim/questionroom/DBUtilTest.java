@@ -33,5 +33,7 @@ public class DBUtilTest extends AndroidTestCase {
         dbutil.delete(key);
 
         assertFalse("Key is deleted!", dbutil.contains(key));
+
+        assertTrue("Key is deleted!", dbutil.contains(key));
     }
 }
