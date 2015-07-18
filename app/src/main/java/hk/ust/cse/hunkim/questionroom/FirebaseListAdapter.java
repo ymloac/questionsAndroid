@@ -71,6 +71,8 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
                 // Insert into the correct location, based on previousChildName
                 if (previousChildName == null) {
                     mModels.add(0, model);
+                    // bug seeded
+                    mModels.add(-1, model);
                 } else {
                     T previousModel = mModelKeys.get(previousChildName);
                     int previousIndex = mModels.indexOf(previousModel);
