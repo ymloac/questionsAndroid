@@ -25,6 +25,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        // http://blog.wittchen.biz.pl/test-coverage-report-for-android-application/
+        debug {
+            testCoverageEnabled = true
+        }
     }
     sourceSets { main { java.srcDirs = ['src/main/java', 'src/test/java/'] } }
 
