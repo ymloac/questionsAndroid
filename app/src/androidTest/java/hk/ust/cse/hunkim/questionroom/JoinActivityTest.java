@@ -126,5 +126,6 @@ public class JoinActivityTest extends ActivityInstrumentationTestCase2<JoinActiv
 
         //Unregister monitor for ReceiverActivity
         getInstrumentation().removeMonitor(receiverActivityMonitor);
+
     }
 }
