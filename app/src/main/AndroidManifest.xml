@@ -3,7 +3,6 @@
     package="hk.ust.cse.hunkim.questionroom" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INJECT_EVENTS"/>
 
     <application
         android:allowBackup="true"

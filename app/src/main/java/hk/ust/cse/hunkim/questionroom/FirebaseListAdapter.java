@@ -67,12 +67,12 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
                 // TOFIX: Any easy way to ser key?
                 setKey(modelName, model);
 
+                // bug seeded
+                // mModels.add(-1, model);
 
                 // Insert into the correct location, based on previousChildName
                 if (previousChildName == null) {
                     mModels.add(0, model);
-                    // bug seeded
-                    mModels.add(-1, model);
                 } else {
                     T previousModel = mModelKeys.get(previousChildName);
                     int previousIndex = mModels.indexOf(previousModel);
