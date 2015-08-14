@@ -172,10 +172,10 @@ public class MainActivity extends ListActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Long echoValue = (Long) dataSnapshot.getValue();
-                        Log.e("Order update:", "" + echoValue);
+                        Long orderValue = (Long) dataSnapshot.getValue();
+                        Log.e("Order update:", "" + orderValue);
 
-                        orderRef.setValue(echoValue - 1);
+                        orderRef.setValue(orderValue - 1);
                     }
 
                     @Override

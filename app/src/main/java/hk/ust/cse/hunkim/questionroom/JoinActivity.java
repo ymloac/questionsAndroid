@@ -70,6 +70,7 @@ public class JoinActivity extends Activity {
             roomNameView.setText("");
             roomNameView.requestFocus();
         } else {
+            // Start main activity
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra(ROOM_NAME, room_name);
             startActivity(intent);

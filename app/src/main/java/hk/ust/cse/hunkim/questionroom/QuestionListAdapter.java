@@ -90,7 +90,7 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
 
         );
 
-        // check we already clicked
+        // check if we already clicked
         boolean clickable = !dbUtil.contains(question.getKey());
 
         echoButton.setClickable(clickable);
@@ -99,6 +99,7 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
 
 
         // http://stackoverflow.com/questions/8743120/how-to-grey-out-a-button
+        // grey out our button
         if (clickable) {
             echoButton.getBackground().setColorFilter(null);
         } else {
