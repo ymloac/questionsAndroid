@@ -24,8 +24,6 @@ import hk.ust.cse.hunkim.questionroom.question.Question;
 
 public class MainActivity extends ListActivity {
 
-    // Add a comment line...
-
     // TODO: change this to your own Firebase URL
     private static final String FIREBASE_URL = "https://classquestion.firebaseio.com/";
 
