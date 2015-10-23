@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.text.Html;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.firebase.client.Query;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import hk.ust.cse.hunkim.questionroom.db.DBUtil;
@@ -89,6 +91,9 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
                                 }
 
         );
+
+        String timedisplay = DateUtils.getRelativeTimeSpanString(question.getTimestamp(), new Date().getTime(), 0, 262144).toString();
+        ((TextView) view.findViewById(R.id.timedisplay)).setText(timedisplay);
 
         // check if we already clicked
         boolean clickable = !dbUtil.contains(question.getKey());
