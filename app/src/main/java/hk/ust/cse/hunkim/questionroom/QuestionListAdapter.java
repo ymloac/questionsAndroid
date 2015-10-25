@@ -79,10 +79,12 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
             msgString += "<font color=red>NEW </font>";
         }
 
-        msgString += "<B>" + question.getHead() + "</B>" + question.getDesc();
+        msgString += "<B>" + question.getHead() + "</B> " + question.getWholeMsg();
 
         ((TextView) view.findViewById(R.id.head_desc)).setText(Html.fromHtml(msgString));
-        view.setOnClickListener(new View.OnClickListener() {
+
+        // originally for adding an echo when click on the list text
+        /*view.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         MainActivity m = (MainActivity) view.getContext();
@@ -90,7 +92,7 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
                                     }
                                 }
 
-        );
+        );*/
 
         String timedisplay = DateUtils.getRelativeTimeSpanString(question.getTimestamp(), new Date().getTime(), 0, 262144).toString();
         ((TextView) view.findViewById(R.id.timedisplay)).setText(timedisplay);

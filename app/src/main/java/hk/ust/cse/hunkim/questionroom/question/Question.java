@@ -13,6 +13,7 @@ public class Question implements Comparable<Question> {
      */
     private String key;
     private String wholeMsg;
+    private String title;
     private String head;
     private String headLastChar;
     private String desc;
@@ -45,10 +46,10 @@ public class Question implements Comparable<Question> {
      * Set question from a String message
      * @param message string message
      */
-    public Question(String message) {
+    public Question(String title, String message) {
         this.wholeMsg = message;
         this.echo = 0;
-        this.head = getFirstSentence(message).trim();
+        this.head = title;
         this.desc = "";
         if (this.head.length() < message.length()) {
             this.desc = message.substring(this.head.length());
@@ -99,9 +100,7 @@ public class Question implements Comparable<Question> {
         return desc;
     }
 
-    public int getEcho() {
-        return echo;
-    }
+    public int getEcho() { return echo; }
 
     public String getWholeMsg() {
         return wholeMsg;

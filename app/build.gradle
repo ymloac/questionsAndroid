@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "hk.ust.cse.hunkim.questionroom"
-        minSdkVersion 18
+        minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -43,7 +43,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
 
     // Firebase
-    compile 'com.firebase:firebase-client-android:2.3.1+'
+    compile 'com.firebase:firebase-client-android:2.4.0+'
 
     // Based on
     // http://developer.android.com/training/testing/unit-testing/local-unit-tests.html
