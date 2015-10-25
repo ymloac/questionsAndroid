@@ -25,7 +25,7 @@ import hk.ust.cse.hunkim.questionroom.question.Question;
 public class MainActivity extends ListActivity {
 
     // TODO: change this to your own Firebase URL
-    private static final String FIREBASE_URL = "https://classquestion.firebaseio.com/";
+    private static final String FIREBASE_URL = "https://brilliant-heat-7209.firebaseio.com/";
 
     private String roomName;
     private Firebase mFirebaseRef;
@@ -132,14 +132,18 @@ public class MainActivity extends ListActivity {
     }
 
     private void sendMessage() {
-        EditText inputText = (EditText) findViewById(R.id.messageInput);
-        String input = inputText.getText().toString();
-        if (!input.equals("")) {
+        EditText inputTitle = (EditText) findViewById(R.id.titleInput);
+        EditText inputMsg = (EditText) findViewById(R.id.messageInput);
+
+        String inputTitleText = inputTitle.getText().toString();
+        String inputMsgText = inputMsg.getText().toString();
+        if (!inputMsgText.equals("") && !inputTitleText.equals("")) {
             // Create our 'model', a Chat object
-            Question question = new Question(input);
+            Question question = new Question(inputTitleText, inputMsgText);
             // Create a new, auto-generated child of that chat location, and save our chat data there
             mFirebaseRef.push().setValue(question);
-            inputText.setText("");
+            inputTitle.setText("");
+            inputMsg.setText("");
         }
     }
 
