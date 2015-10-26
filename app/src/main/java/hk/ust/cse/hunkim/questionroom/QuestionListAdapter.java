@@ -58,7 +58,6 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
         echoButton.setText("" + echo);
         echoButton.setTextColor(Color.BLUE);
 
-
         echoButton.setTag(question.getKey()); // Set tag for button
 
         echoButton.setOnClickListener(
@@ -67,10 +66,35 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
                     public void onClick(View view) {
                         MainActivity m = (MainActivity) view.getContext();
                         m.updateEcho((String) view.getTag());
+                        //view.findViewById(R.id.echo)
+                        //Button echoButton1 = (Button) view.findViewWithTag(view.getTag());
+                        //echoButton1.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+
                     }
                 }
 
         );
+
+        int dislike = question.getDislike();
+        Button dislikeButton = (Button) view.findViewById(R.id.dislike);
+        dislikeButton.setText("" + dislike);
+        dislikeButton.setTextColor(Color.RED);
+
+
+        dislikeButton.setTag(question.getKey()); // Set tag for button
+
+        dislikeButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MainActivity m = (MainActivity) view.getContext();
+                        m.updateDislike((String) view.getTag());
+
+                    }
+                }
+
+        );
+
 
         String msgString = "";
 
@@ -101,16 +125,18 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
         boolean clickable = !dbUtil.contains(question.getKey());
 
         echoButton.setClickable(clickable);
+        dislikeButton.setClickable(clickable);
         echoButton.setEnabled(clickable);
-        view.setClickable(clickable);
+        dislikeButton.setEnabled(clickable);
+        //view.setClickable(clickable);
 
 
         // http://stackoverflow.com/questions/8743120/how-to-grey-out-a-button
         // grey out our button
         if (clickable) {
-            echoButton.getBackground().setColorFilter(null);
+            //echoButton.getBackground().setColorFilter(null);
         } else {
-            echoButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+            //echoButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
         }
 
 

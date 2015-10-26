@@ -25,7 +25,7 @@ import hk.ust.cse.hunkim.questionroom.question.Question;
 public class MainActivity extends ListActivity {
 
     // TODO: change this to your own Firebase URL
-    private static final String FIREBASE_URL = "https://brilliant-heat-7209.firebaseio.com/";
+    private static final String FIREBASE_URL = "https://android-questions.firebaseio.com/";
 
     private String roomName;
     private Firebase mFirebaseRef;
@@ -138,12 +138,19 @@ public class MainActivity extends ListActivity {
         String inputTitleText = inputTitle.getText().toString();
         String inputMsgText = inputMsg.getText().toString();
         if (!inputMsgText.equals("") && !inputTitleText.equals("")) {
-            // Create our 'model', a Chat object
-            Question question = new Question(inputTitleText, inputMsgText);
-            // Create a new, auto-generated child of that chat location, and save our chat data there
-            mFirebaseRef.push().setValue(question);
-            inputTitle.setText("");
-            inputMsg.setText("");
+            if(inputMsgText.length()<3 || inputTitleText.length()<3){
+                Toast.makeText(MainActivity.this, "Title/Content: too short", Toast.LENGTH_SHORT).show();
+            }else if(inputMsgText.length()>1024 || inputTitleText.length()>1024)
+            {
+                Toast.makeText(MainActivity.this, "Title/Content: too long", Toast.LENGTH_SHORT).show();
+            }else {
+                // Create our 'model', a Chat object
+                Question question = new Question(inputTitleText, inputMsgText);
+                // Create a new, auto-generated child of that chat location, and save our chat data there
+                mFirebaseRef.push().setValue(question);
+                inputTitle.setText("");
+                inputMsg.setText("");
+            }
         }
     }
 
@@ -171,6 +178,8 @@ public class MainActivity extends ListActivity {
                 }
         );
 
+
+
         final Firebase orderRef = mFirebaseRef.child(key).child("order");
         orderRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -180,6 +189,52 @@ public class MainActivity extends ListActivity {
                         Log.e("Order update:", "" + orderValue);
 
                         orderRef.setValue(orderValue - 1);
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                }
+        );
+
+        // Update SQLite DB
+        dbutil.put(key);
+    }
+
+    public void updateDislike(String key) {
+        if (dbutil.contains(key)) {
+            Log.e("Dupkey", "Key is already in the DB!");
+            return;
+        }
+
+        final Firebase dislikeRef = mFirebaseRef.child(key).child("dislike");
+        dislikeRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Long dislikeValue = (Long) dataSnapshot.getValue();
+                        Log.e("Dislike update:", "" + dislikeValue);
+
+                        dislikeRef.setValue(dislikeValue + 1);
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                }
+        );
+
+        final Firebase orderRef = mFirebaseRef.child(key).child("order");
+        orderRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Long orderValue = (Long) dataSnapshot.getValue();
+                        Log.e("Order update:", "" + orderValue);
+
+                        orderRef.setValue(orderValue + 1);
                     }
 
                     @Override
