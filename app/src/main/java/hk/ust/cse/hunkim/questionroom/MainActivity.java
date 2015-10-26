@@ -25,11 +25,9 @@ import hk.ust.cse.hunkim.questionroom.question.Question;
 public class MainActivity extends ListActivity {
 
     // TODO: change this to your own Firebase URL
-<<<<<<< HEAD
+
     private static final String FIREBASE_URL = "https://android-questions.firebaseio.com/";
-=======
-    private static final String FIREBASE_URL = "https://brilliant-heat-7209.firebaseio.com/";
->>>>>>> 95e09fc65de8b16e90e94333fad72d2cde9dfec8
+
 
     private String roomName;
     private Firebase mFirebaseRef;
@@ -142,7 +140,6 @@ public class MainActivity extends ListActivity {
         String inputTitleText = inputTitle.getText().toString();
         String inputMsgText = inputMsg.getText().toString();
         if (!inputMsgText.equals("") && !inputTitleText.equals("")) {
-<<<<<<< HEAD
             if(inputMsgText.length()<3 || inputTitleText.length()<3){
                 Toast.makeText(MainActivity.this, "Title/Content: too short", Toast.LENGTH_SHORT).show();
             }else if(inputMsgText.length()>1024 || inputTitleText.length()>1024)
@@ -156,14 +153,6 @@ public class MainActivity extends ListActivity {
                 inputTitle.setText("");
                 inputMsg.setText("");
             }
-=======
-            // Create our 'model', a Chat object
-            Question question = new Question(inputTitleText, inputMsgText);
-            // Create a new, auto-generated child of that chat location, and save our chat data there
-            mFirebaseRef.push().setValue(question);
-            inputTitle.setText("");
-            inputMsg.setText("");
->>>>>>> 95e09fc65de8b16e90e94333fad72d2cde9dfec8
         }
     }
 

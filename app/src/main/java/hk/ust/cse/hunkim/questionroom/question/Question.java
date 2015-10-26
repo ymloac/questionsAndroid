@@ -50,10 +50,7 @@ public class Question implements Comparable<Question> {
     public Question(String title, String message) {
         this.wholeMsg = message;
         this.echo = 0;
-<<<<<<< HEAD
         this.dislike = 0;
-=======
->>>>>>> 95e09fc65de8b16e90e94333fad72d2cde9dfec8
         this.head = title;
         this.desc = "";
         if (this.head.length() < message.length()) {
@@ -104,11 +101,8 @@ public class Question implements Comparable<Question> {
     }
 
     public int getEcho() { return echo; }
-<<<<<<< HEAD
 
     public int getDislike() { return dislike; }
-=======
->>>>>>> 95e09fc65de8b16e90e94333fad72d2cde9dfec8
 
     public String getWholeMsg() {
         return wholeMsg;
