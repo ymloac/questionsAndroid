@@ -95,17 +95,19 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
 
         );
 
-
+        String titleString = "";
         String msgString = "";
 
         question.updateNewQuestion();
         if (question.isNewQuestion()) {
-            msgString += "<font color=red>NEW </font>";
+            ((TextView) view.findViewById(R.id.isNew)).setVisibility(view.VISIBLE);;
         }
 
-        msgString += "<B>" + question.getHead() + "</B> " + question.getWholeMsg();
+        titleString += question.getHead();
+        msgString += question.getWholeMsg();
 
-        ((TextView) view.findViewById(R.id.head_desc)).setText(Html.fromHtml(msgString));
+        ((TextView) view.findViewById(R.id.head_desc)).setText(titleString);
+        ((TextView) view.findViewById(R.id.onlymsg)).setText(msgString);
 
         // originally for adding an echo when click on the list text
         /*view.setOnClickListener(new View.OnClickListener() {
