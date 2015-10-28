@@ -57,14 +57,17 @@
         android:orientation="horizontal"
         >
         <Button
-            android:id="@+id/echo"
+            android:id="@+id/like"
             android:drawableLeft="@drawable/like24"
+            android:background="@drawable/likebutton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
         <Button
             android:id="@+id/dislike"
             android:drawableLeft="@drawable/dislike"
+            android:background="@drawable/likebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
