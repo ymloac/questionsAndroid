@@ -24,7 +24,7 @@ public class Question implements Comparable<Question> {
     private int echo;
     private int dislike;
     private int order;
-    private boolean newQuestion;
+    private boolean latest;
 
     public String getDateString() {
         return dateString;
@@ -61,6 +61,8 @@ public class Question implements Comparable<Question> {
         this.headLastChar = head.substring(head.length() - 1);
 
         this.timestamp = new Date().getTime();
+        this.dateString = "";
+        this.linkedDesc = "";
     }
 
     /**
@@ -132,12 +134,12 @@ public class Question implements Comparable<Question> {
         return order;
     }
 
-    public boolean isNewQuestion() {
-        return newQuestion;
+    public boolean isLatest() {
+        return latest;
     }
 
     public void updateNewQuestion() {
-        newQuestion = this.timestamp > new Date().getTime() - 180000;
+        latest = this.timestamp > new Date().getTime() - 180000;
     }
 
     public String getKey() {
@@ -159,8 +161,8 @@ public class Question implements Comparable<Question> {
         other.updateNewQuestion(); // update NEW button
         this.updateNewQuestion();
 
-        if (this.newQuestion != other.newQuestion) {
-            return this.newQuestion ? 1 : -1; // this is the winner
+        if (this.latest != other.latest) {
+            return this.latest ? 1 : -1; // this is the winner
         }
 
 
