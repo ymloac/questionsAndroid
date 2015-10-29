@@ -39,7 +39,39 @@ public class JoinActivity extends Activity {
                 return true;
             }
         });
+
+        final String[] recentRoom = {"room1", "room2", "room3", "room4", "project", "lab"};
+
+        findViewById(R.id.room1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             suggestJoin(recentRoom[0]);
+            }
+        });
+
+        findViewById(R.id.room2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                suggestJoin(recentRoom[1]);
+             }
+        });
+
+        findViewById(R.id.room3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                suggestJoin(recentRoom[2]);
+            }
+        });
+
+        findViewById(R.id.room4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                suggestJoin(recentRoom[3]);
+            }
+        });
+
     }
+
 
 
     /**
@@ -47,6 +79,13 @@ public class JoinActivity extends Activity {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
+
+    public void suggestJoin(String room) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(ROOM_NAME, room);
+        startActivity(intent);
+    }
+
     public void attemptJoin(View view) {
         // Reset errors.
         roomNameView.setError(null);
