@@ -140,7 +140,6 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
                                         m.updateLike((String) view.getTag());
                                     }
                                 }
-
         );*/
 
         String timedisplay = DateUtils.getRelativeTimeSpanString(question.getTimestamp(), new Date().getTime(), 0, 262144).toString();
