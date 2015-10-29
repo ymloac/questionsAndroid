@@ -29,6 +29,7 @@ public class MainActivity extends ListActivity {
     private static final String FIREBASE_URL = "https://android-questions.firebaseio.com/";
 
 
+
     private String roomName;
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
@@ -132,7 +133,6 @@ public class MainActivity extends ListActivity {
         mFirebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
         mChatListAdapter.cleanup();
     }
-
     private  String FoulLanguageFilter (String s){
         String temp=s.toLowerCase();
         if(temp.matches(".*fuck.*")){
@@ -176,9 +176,11 @@ public class MainActivity extends ListActivity {
         inputTitleText = FoulLanguageFilter(inputTitleText);
         inputMsgText = FoulLanguageFilter(inputMsgText);
 
+
         if(   ! (tempTitle.equals(inputTitleText)) || !(tempTitle.equals(inputMsgText))) {
             Toast.makeText(MainActivity.this, "Title/Content: No foul language Please", Toast.LENGTH_SHORT).show();
         }
+
         if (!inputMsgText.equals("") && !inputTitleText.equals("")) {
             if(inputMsgText.length()<3 || inputTitleText.length()<3){
                 Toast.makeText(MainActivity.this, "Title/Content: too short", Toast.LENGTH_SHORT).show();
@@ -196,11 +198,12 @@ public class MainActivity extends ListActivity {
         }
     }
 
-    public void updateEcho(String key) {
-        if (dbutil.contains(key)) {
+    //toChange is the number of like want to edit
+    public void updateLike(String key, final int toChange) {
+        /*if (dbutil.contains(key)) {
             Log.e("Dupkey", "Key is already in the DB!");
             return;
-        }
+        }*/
 
         final Firebase echoRef = mFirebaseRef.child(key).child("echo");
         echoRef.addListenerForSingleValueEvent(
@@ -210,7 +213,7 @@ public class MainActivity extends ListActivity {
                         Long echoValue = (Long) dataSnapshot.getValue();
                         Log.e("Echo update:", "" + echoValue);
 
-                        echoRef.setValue(echoValue + 1);
+                        echoRef.setValue(echoValue + toChange);
                     }
 
                     @Override
@@ -230,7 +233,7 @@ public class MainActivity extends ListActivity {
                         Long orderValue = (Long) dataSnapshot.getValue();
                         Log.e("Order update:", "" + orderValue);
 
-                        orderRef.setValue(orderValue - 1);
+                        orderRef.setValue(orderValue - toChange);
                     }
 
                     @Override
@@ -240,15 +243,16 @@ public class MainActivity extends ListActivity {
                 }
         );
 
+
         // Update SQLite DB
-        dbutil.put(key);
+        //dbutil.put(key);
     }
 
-    public void updateDislike(String key) {
-        if (dbutil.contains(key)) {
+    public void updateDislike(String key, final int toChange) {
+        /*if (dbutil.contains(key)) {
             Log.e("Dupkey", "Key is already in the DB!");
             return;
-        }
+        }*/
 
         final Firebase dislikeRef = mFirebaseRef.child(key).child("dislike");
         dislikeRef.addListenerForSingleValueEvent(
@@ -258,7 +262,7 @@ public class MainActivity extends ListActivity {
                         Long dislikeValue = (Long) dataSnapshot.getValue();
                         Log.e("Dislike update:", "" + dislikeValue);
 
-                        dislikeRef.setValue(dislikeValue + 1);
+                        dislikeRef.setValue(dislikeValue + toChange);
                     }
 
                     @Override
@@ -276,7 +280,7 @@ public class MainActivity extends ListActivity {
                         Long orderValue = (Long) dataSnapshot.getValue();
                         Log.e("Order update:", "" + orderValue);
 
-                        orderRef.setValue(orderValue + 1);
+                        orderRef.setValue(orderValue + toChange);
                     }
 
                     @Override
