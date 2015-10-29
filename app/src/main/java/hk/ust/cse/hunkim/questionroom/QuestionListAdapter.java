@@ -2,13 +2,10 @@ package hk.ust.cse.hunkim.questionroom;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.client.Query;
@@ -61,8 +58,8 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
         likeButton.setTextColor(Color.BLUE);
 
         likeButton.setTag(question.getKey()); // Set tag for button
-        //likeButton.setSelected(dbUtil.contains(question.getKey()));
-        //view.setTag(question.getKey());
+        likeButton.setSelected(dbUtil.getLikeStatus(question.getKey()));
+
 
         likeButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -72,18 +69,11 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
 
                         Button questionDislikeButton = (Button) ((LinearLayout) view.getParent()).findViewById(R.id.dislike);
                         if(view.isSelected()){ // unlike when selected
-
                             m.updateLike((String) view.getTag(), -1);
-                            view.setSelected(false);
-                            //dbUtil.delete(view.getTag().toString());
                         }else if(questionDislikeButton.isSelected()){ // another dislike button is selected before
-
                             m.updateDislike((String) view.getTag(), -1);
-                            m.updateLike((String) view.getTag(), 1);questionDislikeButton.setSelected(false);
-                            view.setSelected(true);
-
+                            m.updateLike((String) view.getTag(), 1);
                         }else{ //both like and dislike button are not selected before
-
                             m.updateLike((String) view.getTag(), 1);
                             //******************
                             //* From Matthew: Here,the code below, I had checked to ensure that I am retrieving the button with the tag same as the current question key
@@ -93,21 +83,7 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
                             //*     thisButton.setSelected(true);
                             //* but it turns out the same result as the code below
                             //*******************
-                            view.setSelected(true);
                         }
-
-
-
-
-
-                        //Button likebutton = (Button) likeParent.findViewById( R.id.echo );
-                        //Button cancelButton = (Button) cancelParent.findViewById(R.id.id_name);
-                        //Log.e("view tag", view.getTag().toString());
-                        //Log.e("like tag",likebutton.getTag().toString());
-                        //view.findViewById(R.id.echo)
-                        // Button echoButton1 = (Button) view.findViewWithTag(view.getTag());
-                        //likebutton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
-                        //likeParent.setVisibility(View.GONE);
                     }
                 }
 
@@ -120,29 +96,25 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
 
 
         dislikeButton.setTag(question.getKey()); // Set tag for button
-        dislikeButton.setSelected(dbUtil.contains(question.getKey()));
+        dislikeButton.setSelected(dbUtil.getDislikeStatus(question.getKey()));
 
-        dislikeButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        MainActivity m = (MainActivity) view.getContext();
-                        Button questionLikeButton = (Button) ((LinearLayout) view.getParent()).findViewById(R.id.like);
-                        if(view.isSelected()){ // undislike when selected
-                            view.setSelected(false);
-                            m.updateDislike((String) view.getTag(), -1);
-                        }else if(questionLikeButton.isSelected()){ // another like button is selected before
-                            questionLikeButton.setSelected(false);
-                            m.updateLike((String) view.getTag(), -1);
-                            view.setSelected(true);
-                            m.updateDislike((String) view.getTag(), 1);
-                        }else{ //both like and dislike button are not selected before
-                            //From Matthew: same situation as the like implementation above
-                            view.setSelected(true);
-                            m.updateDislike((String) view.getTag(),1);
+                dislikeButton.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                MainActivity m = (MainActivity) view.getContext();
+                                Button questionLikeButton = (Button) ((LinearLayout) view.getParent()).findViewById(R.id.like);
+                                if (view.isSelected()) { // undislike when selected
+                                    m.updateDislike((String) view.getTag(), -1);
+                                } else if (questionLikeButton.isSelected()) { // another like button is selected before
+                                    m.updateLike((String) view.getTag(), -1);
+                                    m.updateDislike((String) view.getTag(), 1);
+                                } else { //both like and dislike button are not selected before
+                                    //From Mattherw: same situation as the like implementation above
+                                    m.updateDislike((String) view.getTag(), 1);
+                                }
+                            }
                         }
-                    }
-                }
 
         );
 
@@ -150,8 +122,8 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
         String msgString = "";
 
         question.updateNewQuestion();
-        if (question.isNewQuestion()) {
-            ((TextView) view.findViewById(R.id.isNew)).setVisibility(view.VISIBLE);;
+        if (question.isLatest()) {
+            ((TextView) view.findViewById(R.id.isNew)).setVisibility(view.VISIBLE);
         }
 
         titleString += question.getHead();

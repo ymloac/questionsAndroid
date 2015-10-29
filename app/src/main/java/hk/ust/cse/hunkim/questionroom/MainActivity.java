@@ -158,10 +158,12 @@ public class MainActivity extends ListActivity {
 
     //toChange is the number of like want to edit
     public void updateLike(String key, final int toChange) {
-        /*if (dbutil.contains(key)) {
-            Log.e("Dupkey", "Key is already in the DB!");
-            return;
-        }*/
+        if (!dbutil.contains(key)) {
+            //create new entry for this key
+            dbutil.put(key);
+        }
+        //update SQLite DB
+        dbutil.updateLikeStatus(key, toChange);
 
         final Firebase echoRef = mFirebaseRef.child(key).child("echo");
         echoRef.addListenerForSingleValueEvent(
@@ -200,17 +202,15 @@ public class MainActivity extends ListActivity {
                     }
                 }
         );
-
-
-        // Update SQLite DB
-        //dbutil.put(key);
     }
 
     public void updateDislike(String key, final int toChange) {
-        /*if (dbutil.contains(key)) {
-            Log.e("Dupkey", "Key is already in the DB!");
-            return;
-        }*/
+        if (!dbutil.contains(key)) {
+            //create new entry for this key
+            dbutil.put(key);
+        }
+        //update SQLite DB
+        dbutil.updateDislikeStatus(key, toChange);
 
         final Firebase dislikeRef = mFirebaseRef.child(key).child("dislike");
         dislikeRef.addListenerForSingleValueEvent(
@@ -248,8 +248,6 @@ public class MainActivity extends ListActivity {
                 }
         );
 
-        // Update SQLite DB
-        dbutil.put(key);
     }
 
     public void Close(View view) {
