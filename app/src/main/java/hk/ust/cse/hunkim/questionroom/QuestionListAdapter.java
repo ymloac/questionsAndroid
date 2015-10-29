@@ -150,7 +150,7 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
         String msgString = "";
 
         question.updateNewQuestion();
-        if (question.isNewQuestion()) {
+        if (question.isLatest()) {
             ((TextView) view.findViewById(R.id.isNew)).setVisibility(view.VISIBLE);;
         }
 
@@ -168,7 +168,6 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
                                         m.updateLike((String) view.getTag());
                                     }
                                 }
-
         );*/
 
         String timedisplay = DateUtils.getRelativeTimeSpanString(question.getTimestamp(), new Date().getTime(), 0, 262144).toString();

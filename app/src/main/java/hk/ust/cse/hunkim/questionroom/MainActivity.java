@@ -29,6 +29,7 @@ public class MainActivity extends ListActivity {
     private static final String FIREBASE_URL = "https://android-questions.firebaseio.com/";
 
 
+
     private String roomName;
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
@@ -132,6 +133,37 @@ public class MainActivity extends ListActivity {
         mFirebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
         mChatListAdapter.cleanup();
     }
+    private  String FoulLanguageFilter (String s){
+        String temp=s.toLowerCase();
+        if(temp.matches(".*fuck.*")){
+            temp = temp.replaceAll( "fuck" , "love");
+        }
+        if(temp.matches(".*shit.*")){
+            temp = temp.replaceAll( "shit" , "oh my shirt");
+        }
+        if(temp.matches(".*damn.*")){
+            temp = temp.replaceAll( "damn" , "oh my god");
+        }
+        if(temp.matches(".*dick.*")){
+            temp = temp.replaceAll( "dick" , "dragon");
+        }
+        if(temp.matches(".*cocky.*")){
+            temp = temp.replaceAll( "cocky" , "lovely");
+        }
+        if(temp.matches(".*pussy.*")){
+            temp = temp.replaceAll( "pussy" , "badlady");
+        }
+        if(temp.matches(".*gayfag.*")){
+            temp = temp.replaceAll( "gayfag" , "handsome boy");
+        }
+        if(temp.matches(".*asshole.*")){
+            temp = temp.replaceAll( "asshole" , "myfriend");
+        }
+        if(temp.matches(".*bitch.*")){
+            temp = temp.replaceAll( "bitch" , "badgirl");
+        }
+        return temp;
+    }
 
     private void sendMessage() {
         EditText inputTitle = (EditText) findViewById(R.id.titleInput);
@@ -139,6 +171,16 @@ public class MainActivity extends ListActivity {
 
         String inputTitleText = inputTitle.getText().toString();
         String inputMsgText = inputMsg.getText().toString();
+        String tempTitle = new String(inputTitleText);
+        String tempMsg =   new String(inputMsgText);
+        inputTitleText = FoulLanguageFilter(inputTitleText);
+        inputMsgText = FoulLanguageFilter(inputMsgText);
+
+
+        if(   ! (tempTitle.equals(inputTitleText)) || !(tempTitle.equals(inputMsgText))) {
+            Toast.makeText(MainActivity.this, "Title/Content: No foul language Please", Toast.LENGTH_SHORT).show();
+        }
+
         if (!inputMsgText.equals("") && !inputTitleText.equals("")) {
             if(inputMsgText.length()<3 || inputTitleText.length()<3){
                 Toast.makeText(MainActivity.this, "Title/Content: too short", Toast.LENGTH_SHORT).show();
