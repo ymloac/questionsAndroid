@@ -26,7 +26,7 @@ public class MainActivity extends ListActivity {
 
     // TODO: change this to your own Firebase URL
 
-    private static final String FIREBASE_URL = "https://shining-inferno-8548.firebaseio.com/";
+    private static final String FIREBASE_URL = "https://android-questions.firebaseio.com/";
 
 
 
@@ -177,7 +177,7 @@ public class MainActivity extends ListActivity {
         inputMsgText = FoulLanguageFilter(inputMsgText);
 
 
-        if(   ! (tempTitle.equals(inputTitleText)) || !(tempTitle.equals(inputMsgText))) {
+        if(   ! (tempTitle.equals(inputTitleText)) || !(tempMsg.equals(inputMsgText))) {
             Toast.makeText(MainActivity.this, "Title/Content: No foul language Please", Toast.LENGTH_SHORT).show();
         }
 

@@ -75,14 +75,6 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
                             m.updateLike((String) view.getTag(), 1);
                         }else{ //both like and dislike button are not selected before
                             m.updateLike((String) view.getTag(), 1);
-                            //******************
-                            //* From Matthew: Here,the code below, I had checked to ensure that I am retrieving the button with the tag same as the current question key
-                            //*               For testing, you may create three new questions with the same like numbers,
-                            //                then like the middle item and the problem I've mentioned will be appeared.
-                            //      Button thisButton = (Button) ((RelativeLayout) view.getParent().getParent()).findViewWithTag(question.getKey()).findViewById(R.id.like);
-                            //*     thisButton.setSelected(true);
-                            //* but it turns out the same result as the code below
-                            //*******************
                         }
                     }
                 }
@@ -115,7 +107,6 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
                                 }
                             }
                         }
-
         );
 
         String titleString = "";
@@ -132,36 +123,9 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
         ((TextView) view.findViewById(R.id.head_desc)).setText(titleString);
         ((TextView) view.findViewById(R.id.onlymsg)).setText(msgString);
 
-        // originally for adding an echo when click on the list text
-        /*view.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        MainActivity m = (MainActivity) view.getContext();
-                                        m.updateLike((String) view.getTag());
-                                    }
-                                }
-        );*/
 
         String timedisplay = DateUtils.getRelativeTimeSpanString(question.getTimestamp(), new Date().getTime(), 0, 262144).toString();
         ((TextView) view.findViewById(R.id.timedisplay)).setText(timedisplay);
-
-        // check if we already clicked
-        boolean clickable = !dbUtil.contains(question.getKey());
-
-        /*echoButton.setClickable(clickable);
-        dislikeButton.setClickable(clickable);
-        echoButton.setEnabled(clickable);
-        dislikeButton.setEnabled(clickable);*/
-        //view.setClickable(clickable);
-
-
-        // http://stackoverflow.com/questions/8743120/how-to-grey-out-a-button
-        // grey out our button
-        if (clickable) {
-            //echoButton.getBackground().setColorFilter(null);
-        } else {
-            //echoButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
-        }
 
 
         view.setTag(question.getKey());  // store key in the view
