@@ -146,7 +146,7 @@ public class DBUtil {
              return null;
 
         Cursor c = db.rawQuery(
-                    "SELECT " + DBHelper.ROOM_NAME
+                    "SELECT DISTINCT " + DBHelper.ROOM_NAME
                             + " FROM " + DBHelper.HISTORY_TABLE_NAME
                             + " WHERE " + DBHelper.OPERATION_TYPE_NAME + " = 1 "
                             + " ORDER BY " + DBHelper.TIMESTAMP_NAME + " DESC", null);
