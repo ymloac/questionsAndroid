@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.AutoCompleteTextView;
+import android.widget.ArrayAdapter;
 
 import java.util.Arrays;
 
@@ -36,6 +38,13 @@ public class JoinActivity extends Activity {
         // get the DB Helper
         DBHelper mDbHelper = new DBHelper(this);
         dbutil = new DBUtil(mDbHelper);
+
+        // AutoCompleteTextView
+        String[] autoRoomSugg ={"COMP3111","3111","midterm1",".midterm2","project","milestone1","milestone2","lab",
+                "presentation","lab","AWS","Firebase","Trello","github","gitbase","canvas","KimSung","peter"};
+        AutoCompleteTextView roomlistcomplete = (AutoCompleteTextView) findViewById(R.id.room_name);
+        ArrayAdapter<String> adapter =  new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, autoRoomSugg);
+        roomlistcomplete.setAdapter(adapter);
 
         // Set up the login form.
         roomNameView = (TextView) findViewById(R.id.room_name);
