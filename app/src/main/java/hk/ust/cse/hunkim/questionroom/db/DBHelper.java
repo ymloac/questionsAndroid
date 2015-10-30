@@ -19,11 +19,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String ROOM_NAME = "roomName";
     public static final String TIMESTAMP_NAME = "timestamp";
 
-    private static final String SQL_CREATE_ENTRIES =
+    private static final String SQL_CREATE_ENTRIES1 =
             "CREATE TABLE " + TABLE_NAME + " (" + KEY_NAME + " TEXT UNIQUE,"
                                                 + LIKE_NAME + " BOOLEAN,"
-                                                + DISLIKE_NAME + " BOOLEAN);"
-          + "CREATE TABLE " + HISTORY_TABLE_NAME + " (" + ID_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+                                                + DISLIKE_NAME + " BOOLEAN);";
+    private static final String SQL_CREATE_ENTRIES2 =
+            "CREATE TABLE " + HISTORY_TABLE_NAME + " (" + ID_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                                                        + OPERATION_TYPE_NAME + " INTEGER," //1:enter room 2:post 3:reply
                                                        + ROOM_NAME + " TEXT,"
                                                        + KEY_NAME + " TEXT,"
@@ -33,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "questionList.db";
 
     public DBHelper(Context context) {
@@ -42,7 +43,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(SQL_CREATE_ENTRIES1);
+        db.execSQL(SQL_CREATE_ENTRIES2);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

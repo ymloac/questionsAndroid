@@ -2,6 +2,7 @@ package hk.ust.cse.hunkim.questionroom.db;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -132,11 +133,24 @@ public class DBUtil {
     public String[] getRecentRoomName() {
         // Gets the data repository in write mode
         SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT DISTINCT tbl_name from sqlite_master where tbl_name = '"
+                        + DBHelper.HISTORY_TABLE_NAME +"'", null);
+        if(cursor!=null) {
+            if(cursor.getCount()>0) {
+                cursor.close();
+            }
+            cursor.close();
+        }else
+             return null;
+
         Cursor c = db.rawQuery(
-                "SELECT DISTINCT " + DBHelper.ROOM_NAME
-                                  + " FROM " + DBHelper.HISTORY_TABLE_NAME
-                                  + " WHERE " + DBHelper.OPERATION_TYPE_NAME + " = 1 "
-                                  + " ORDER BY " + DBHelper.TIMESTAMP_NAME + " DESC", null);
+                    "SELECT " + DBHelper.ROOM_NAME
+                            + " FROM " + DBHelper.HISTORY_TABLE_NAME
+                            + " WHERE " + DBHelper.OPERATION_TYPE_NAME + " = 1 "
+                            + " ORDER BY " + DBHelper.TIMESTAMP_NAME + " DESC", null);
+
         if(c == null)
             return null;
         String[] result = new String[c.getCount()];
