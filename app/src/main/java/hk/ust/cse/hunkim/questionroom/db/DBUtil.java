@@ -133,10 +133,10 @@ public class DBUtil {
         // Gets the data repository in write mode
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor c = db.rawQuery(
-                "SELECT " + DBHelper.ROOM_NAME
-                          + " FROM " + DBHelper.HISTORY_TABLE_NAME
-                          + " WHERE " + DBHelper.OPERATION_TYPE_NAME + " = 1 "
-                          + " ORDER BY " + DBHelper.TIMESTAMP_NAME + " DESC", null);
+                "SELECT DISTINCT " + DBHelper.ROOM_NAME
+                                  + " FROM " + DBHelper.HISTORY_TABLE_NAME
+                                  + " WHERE " + DBHelper.OPERATION_TYPE_NAME + " = 1 "
+                                  + " ORDER BY " + DBHelper.TIMESTAMP_NAME + " DESC", null);
         if(c == null)
             return null;
         String[] result = new String[c.getCount()];
