@@ -1,3 +1,5 @@
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,6 +17,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:src="@drawable/room_icon"
             android:layout_alignParentTop = "true"
             android:singleLine="true"
@@ -29,18 +32,20 @@
         android:hint="@string/prompt_room_name"
         android:gravity="center_horizontal"
         android:inputType="textShortMessage"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="22dp"
         android:maxLines="1"
         android:singleLine="true" />
 
     <Button
         android:id="@+id/join_button"
         style="?android:textAppearanceSmall"
+        android:textColor="#435190"
+
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/room_name"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:onClick="attemptJoin"
         android:text="@string/action_join"
         android:autoLink="web"
@@ -50,7 +55,7 @@
     <TextView
         android:id="@+id/suggested"
         android:layout_below="@+id/join_button"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
@@ -64,7 +69,7 @@
     <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/RoomGridLayout"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/suggested"
@@ -80,9 +85,13 @@
             android:text="room1"
             android:id="@+id/room1"
             android:textSize="12dp"
+            android:textColor="#A68137"
+            android:background="@drawable/buttonsharp"
             android:onClick="suggestJoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:autoLink="web"
             />
 
@@ -90,28 +99,41 @@
             android:text="room2"
             android:id="@+id/room2"
             android:textSize="12dp"
+            android:textColor="#A68137"
+            android:background="@drawable/buttonsharp"
             android:onClick="suggestJoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnSpan="1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:autoLink="web" />
 
         <Button
             android:text="room3"
             android:id="@+id/room3"
             android:textSize="12dp"
+            android:textColor="#A68137"
+            android:background="@drawable/buttonsharp"
             android:onClick="suggestJoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:autoLink="web" />
 
         <Button
             android:text="room4"
             android:id="@+id/room4"
             android:textSize="12dp"
+            android:textColor="#A68137"
+            android:background="@drawable/buttonsharp"
             android:onClick="suggestJoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:autoLink="web" />
     </GridLayout>
 
