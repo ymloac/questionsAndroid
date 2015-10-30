@@ -112,16 +112,50 @@ public class QuestionListAdapter extends FirebaseListAdapter<Question> {
         String titleString = "";
         String msgString = "";
 
+
         question.updateNewQuestion();
+
         if (question.isLatest()) {
             ((TextView) view.findViewById(R.id.isNew)).setVisibility(view.VISIBLE);
         }
 
         titleString += question.getHead();
         msgString += question.getWholeMsg();
+        String subStringOfMsg = msgString ;
+        if ( msgString.length()>10) {
+            subStringOfMsg = msgString.substring(0, 9) + "...";
+        }
 
         ((TextView) view.findViewById(R.id.head_desc)).setText(titleString);
-        ((TextView) view.findViewById(R.id.onlymsg)).setText(msgString);
+        ((TextView) view.findViewById(R.id.onlymsg)).setText(subStringOfMsg);
+
+        final TextView content = (TextView) view.findViewById(R.id.onlymsg);
+
+        final Button showAllContent = (Button) view.findViewById(R.id.showall);
+        showAllContent.setText("Read more" );
+        showAllContent.setTextColor(Color.BLUE);
+        showAllContent.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        question.setreadall();
+                        String msgString = "";
+                        msgString += question.getWholeMsg();
+                        String subStringOfMsg = msgString;
+                        if ( msgString.length()>10) {
+                            subStringOfMsg = msgString.substring(0, 9) + "...";
+                        }
+                        if(question.getreadall()==true) {
+                            content.setText(msgString);
+                            showAllContent.setText("Read less");
+                        }
+                        else {
+                            content.setText(subStringOfMsg);
+                            showAllContent.setText("Read more" );
+                        }
+                        // ((TextView) view.findViewById(R.id.onlymsg)).setText(msgString);
+                    }
+                });
 
 
         String timedisplay = DateUtils.getRelativeTimeSpanString(question.getTimestamp(), new Date().getTime(), 0, 262144).toString();

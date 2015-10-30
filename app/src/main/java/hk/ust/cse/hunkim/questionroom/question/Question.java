@@ -25,6 +25,16 @@ public class Question implements Comparable<Question> {
     private int dislike;
     private int order;
     private boolean latest;
+    private boolean readall;
+
+    public boolean getreadall(){
+        return readall;
+    }
+
+    public void setreadall(){
+        boolean temp = ! readall;
+        readall = temp;
+    }
 
     public String getDateString() {
         return dateString;
