@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/topic"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/timedisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:id="@+id/isNew"
@@ -19,11 +29,10 @@
             android:padding="3dp"
             android:background="#FFFF0000"
             android:textColor="@android:color/white"
-            android:textSize="10dp"
+            android:textSize="8dp"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:autoLink="web" />
 
         <TextView
@@ -32,34 +41,21 @@
             android:textSize="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:autoLink="web" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/topic2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/topic"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+            android:autoLink="web"
+            android:layout_below="@+id/isNew"
+            />
 
         <TextView
             android:id="@+id/onlymsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_below="@+id/topic"
+            android:layout_below="@+id/head_desc"
             android:autoLink="web"
             android:gravity="top"
             android:singleLine="false"
-            android:isScrollContainer="true"
-            android:textSize="15dp" />
+            android:isScrollContainer="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/info"
@@ -67,58 +63,40 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_below="@+id/topic2"
+        android:layout_below="@+id/topic"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
         <Button
             android:id="@+id/like"
-            android:drawableLeft="@drawable/like24"
+            android:drawableLeft="@drawable/like"
             android:background="@drawable/likebutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
             />
 
         <Button
             android:id="@+id/dislike"
-            android:drawableLeft="@drawable/dislike"
+            android:drawableLeft="@drawable/heartdislike"
             android:background="@drawable/likebutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="40dp"
+            android:layout_height="25dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="56dp"
             android:layout_height="30dp"
             android:id="@+id/showall"
             android:textSize="11dp"
             android:hint="Read more"
             android:textColor="#48ff39"
             android:textStyle="italic"
-            android:layout_above="@+id/info"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/topic3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
 
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/timedisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.18"
-        android:layout_below="@+id/info"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
