@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Date;
+
 /**
  * Created by hunkim on 7/15/15.
  */
@@ -110,4 +112,41 @@ public class DBUtil {
         c.close();
         return status;
     }
+
+    // record room name entered
+    public void updateRoomEntry(String roomName){
+        // Gets the data repository in write mode
+        SQLiteDatabase db = helper.getReadableDatabase();
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.OPERATION_TYPE_NAME, 1);
+        values.put(DBHelper.ROOM_NAME, roomName);
+        values.put(DBHelper.TIMESTAMP_NAME, new Date().getTime());
+
+        db.insert(
+                DBHelper.HISTORY_TABLE_NAME,
+                null,
+                values);
+    }
+    // return string array where col. 0 is room name col. 1 timestamp
+    public String[] getRecentRoomName() {
+        // Gets the data repository in write mode
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT " + DBHelper.ROOM_NAME
+                          + " FROM " + DBHelper.HISTORY_TABLE_NAME
+                          + " WHERE " + DBHelper.OPERATION_TYPE_NAME + " = 1 "
+                          + " ORDER BY " + DBHelper.TIMESTAMP_NAME + " DESC", null);
+        if(c == null)
+            return null;
+        String[] result = new String[c.getCount()];
+        int i = 0;
+        while(c.moveToNext()){
+            result[i] = c.getString(c.getColumnIndex(DBHelper.ROOM_NAME));
+            i++;
+        }
+        return result;
+    }
+
+
 }

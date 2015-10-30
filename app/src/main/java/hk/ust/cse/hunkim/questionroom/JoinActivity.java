@@ -7,7 +7,13 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Arrays;
+
+import hk.ust.cse.hunkim.questionroom.db.DBHelper;
+import hk.ust.cse.hunkim.questionroom.db.DBUtil;
 
 
 /**
@@ -20,12 +26,16 @@ public class JoinActivity extends Activity {
      */
     // UI references.
     private TextView roomNameView;
+    private DBUtil dbutil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
+        // get the DB Helper
+        DBHelper mDbHelper = new DBHelper(this);
+        dbutil = new DBUtil(mDbHelper);
 
         // Set up the login form.
         roomNameView = (TextView) findViewById(R.id.room_name);
@@ -40,36 +50,32 @@ public class JoinActivity extends Activity {
             }
         });
 
-        final String[] recentRoom = {"room1", "room2", "room3", "room4", "project", "lab"};
+//        String[] presetList = {"room1", "room2", "room3", "room4", "project", "lab"};
+        final String[] tmp = dbutil.getRecentRoomName();
+        final String [] recentRoom = new String[9];
+        for(int i = 0; i < 4; i++){
+            if(i < tmp.length)
+                recentRoom[i] = tmp[i];
+            else
+                recentRoom[i] = "";
+        }
 
-        findViewById(R.id.room1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-             suggestJoin(recentRoom[0]);
+        int[] viewIds = new int[] {R.id.room1, R.id.room2, R.id.room3, R.id.room4};
+        for(int i = 0; i < 4; i++){
+            final int j = i;
+            Button recentButton = (Button) findViewById(viewIds[i]);
+            if(recentRoom[i] == ""){
+                recentButton.setVisibility(View.INVISIBLE);
+                continue;
             }
-        });
-
-        findViewById(R.id.room2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                suggestJoin(recentRoom[1]);
-             }
-        });
-
-        findViewById(R.id.room3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                suggestJoin(recentRoom[2]);
-            }
-        });
-
-        findViewById(R.id.room4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                suggestJoin(recentRoom[3]);
-            }
-        });
-
+            recentButton.setText(recentRoom[i]);
+            recentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    suggestJoin(Arrays.copyOf(recentRoom, recentRoom.length)[j]);
+                }
+            });
+        }
     }
 
 
@@ -112,6 +118,7 @@ public class JoinActivity extends Activity {
             // Start main activity
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra(ROOM_NAME, room_name);
+            dbutil.updateRoomEntry(room_name);
             startActivity(intent);
         }
     }
