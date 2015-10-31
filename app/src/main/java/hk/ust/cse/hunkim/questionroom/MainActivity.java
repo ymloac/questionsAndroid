@@ -134,34 +134,46 @@ public class MainActivity extends ListActivity {
         mChatListAdapter.cleanup();
     }
     private  String FoulLanguageFilter (String s){
-        String temp=s.toLowerCase();
-        if(temp.matches(".*fuck.*")){
-            temp = temp.replaceAll( "fuck" , "love");
-        }
-        if(temp.matches(".*shit.*")){
-            temp = temp.replaceAll( "shit" , "oh my shirt");
-        }
-        if(temp.matches(".*damn.*")){
-            temp = temp.replaceAll( "damn" , "oh my god");
-        }
-        if(temp.matches(".*dick.*")){
-            temp = temp.replaceAll( "dick" , "dragon");
-        }
-        if(temp.matches(".*cocky.*")){
-            temp = temp.replaceAll( "cocky" , "lovely");
-        }
-        if(temp.matches(".*pussy.*")){
-            temp = temp.replaceAll( "pussy" , "badlady");
-        }
-        if(temp.matches(".*gayfag.*")){
-            temp = temp.replaceAll( "gayfag" , "handsome boy");
-        }
-        if(temp.matches(".*asshole.*")){
-            temp = temp.replaceAll( "asshole" , "myfriend");
-        }
-        if(temp.matches(".*bitch.*")){
-            temp = temp.replaceAll( "bitch" , "badgirl");
-        }
+        String temp=s;
+        temp = temp.replaceAll( "fuck" , "love");
+        temp = temp.replaceAll( "Fuck" , "Love");
+        temp = temp.replaceAll( "FUCK" , "LOVE");
+
+        temp = temp.replaceAll( "shit" , "oh my shirt");
+        temp = temp.replaceAll( "Shit" , "Oh my shirt");
+        temp = temp.replaceAll( "SHIT" , "OH MY SHIRT");
+
+        temp = temp.replaceAll( "damn" , "oh my god");
+        temp = temp.replaceAll( "Damn" , "Oh my god");
+        temp = temp.replaceAll( "DAMN" , "OH MY GOD");
+
+        temp = temp.replaceAll( "dick" , "dragon");
+        temp = temp.replaceAll( "Dick" , "Dragon");
+        temp = temp.replaceAll( "DICK" , "DRAGON");
+
+
+        temp = temp.replaceAll( "cocky" , "lovely");
+        temp = temp.replaceAll( "Cocky" , "Lovely");
+        temp = temp.replaceAll( "COCKY" , "LOVELY");
+
+
+        temp = temp.replaceAll( "pussy" , "badlady");
+        temp = temp.replaceAll( "Pussy" , "Badlady");
+        temp = temp.replaceAll( "PUSSY" , "BADLADY");
+
+        temp = temp.replaceAll( "gayfag" , "handsome boy");
+        temp = temp.replaceAll( "Gayfag" , "Handsome boy");
+        temp = temp.replaceAll( "GAYFAG" , "HANDSOME　BOY");
+
+
+        temp = temp.replaceAll( "asshole" , "myfriend");
+        temp = temp.replaceAll( "Asshole" , "Myfriend");
+        temp = temp.replaceAll( "ASSHOLE" , "MYFRIEND");
+
+        temp = temp.replaceAll( "bitch" , "badgirl");
+        temp = temp.replaceAll( "Bitch" , "Badgirl");
+        temp = temp.replaceAll( "BITCH" , "BADGIRL");
+
         return temp;
     }
 
