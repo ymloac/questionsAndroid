@@ -2,15 +2,8 @@ package hk.ust.cse.hunkim.questionroom.question;
 
 import java.util.Date;
 
-/**
- * Created by hunkim on 7/16/15.
- */
 public class Question implements Comparable<Question> {
 
-    /**
-     * Must be synced with firebase JSON structure
-     * Each must have getters
-     */
     private String key;
     private String wholeMsg;
     private String title;
@@ -25,38 +18,9 @@ public class Question implements Comparable<Question> {
     private int dislike;
     private int order;
     private boolean latest;
+    private String dateString;
     private boolean readall;
 
-    public boolean getreadall(){
-        return readall;
-    }
-
-    public void setreadall(){
-        boolean temp = ! readall;
-        readall = temp;
-    }
-
-    public String getDateString() {
-        return dateString;
-    }
-
-    private String dateString;
-
-    public String getTrustedDesc() {
-        return trustedDesc;
-    }
-
-    private String trustedDesc;
-
-    // Required default constructor for Firebase object mapping
-    @SuppressWarnings("unused")
-    private Question() {
-    }
-
-    /**
-     * Set question from a String message
-     * @param message string message
-     */
     public Question(String title, String message) {
         this.wholeMsg = message;
         this.echo = 0;
@@ -158,6 +122,28 @@ public class Question implements Comparable<Question> {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getDateString() {
+        return dateString;
+    }
+    public String getTrustedDesc() {
+        return trustedDesc;
+    }
+
+    private String trustedDesc;
+
+    // Required default constructor for Firebase object mapping
+    @SuppressWarnings("unused")
+    private Question() {
+    }
+    public boolean getreadall(){
+        return readall;
+    }
+
+    public void setreadall(){
+        boolean temp = ! readall;
+        readall = temp;
     }
 
     /**
