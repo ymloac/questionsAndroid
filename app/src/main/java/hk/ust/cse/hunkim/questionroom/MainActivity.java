@@ -30,6 +30,7 @@ public class MainActivity extends ListActivity {
 
 
 
+
     private String roomName;
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
@@ -133,6 +134,7 @@ public class MainActivity extends ListActivity {
         mFirebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
         mChatListAdapter.cleanup();
     }
+
     private  String FoulLanguageFilter (String s){
         String temp=s.toLowerCase();
         if(temp.matches(".*fuck.*")){

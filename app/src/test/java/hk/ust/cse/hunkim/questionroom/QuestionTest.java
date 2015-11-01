@@ -5,6 +5,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
 
 import java.util.Date;
+import java.util.Objects;
 
 import hk.ust.cse.hunkim.questionroom.question.Question;
 
@@ -52,15 +53,15 @@ public class QuestionTest  extends TestCase {
 
     @SmallTest
     public void testDesc() {
-        assertEquals("testgetDesc is fail", "Hello", q.getDesc());
+        assertEquals("testgetDesc is fail", "? This is very nice", q.getDesc());
     }
 
     public void testEcho() {
-        assertEquals("testEcho is fail", "0", q.getEcho());
+        assertEquals("testEcho is fail", 0, q.getEcho());
     }
 
     public void testDislike() {
-        assertEquals("testDislike is fail", "0", q.getDislike());
+        assertEquals("testDislike is fail", 0, q.getDislike());
     }
 
     public void testWholeMsg() {
@@ -76,7 +77,7 @@ public class QuestionTest  extends TestCase {
     }
 
     public void testisCompleted() {
-        assertEquals("testisCompleted   is fail", 0, q.isCompleted());
+        assertEquals("testisCompleted   is fail", false, q.isCompleted());
     }
 
     public void testgetTimestamp() {
@@ -85,7 +86,7 @@ public class QuestionTest  extends TestCase {
     }
 
     public void testgetTags() {
-        assertEquals("testgetTags   is fail", "", q.getTags());
+        assertEquals("testgetTags   is fail", null, q.getTags());
     }
 
     public void testgetOrder() {
@@ -98,7 +99,7 @@ public class QuestionTest  extends TestCase {
 
     public void testupdateNewQuestion() {
         q.updateNewQuestion();
-        assertEquals(" testupdateNewQuestion  is fail", 0, q.isLatest());
+        assertEquals(" testupdateNewQuestion  is fail", true, q.isLatest());
     }
 
     public void testgetKey() {
@@ -136,23 +137,26 @@ public class QuestionTest  extends TestCase {
         }
         int expected =  q2.getEcho() - q.getEcho();
         */
-        assertEquals(" testcompareTo  is fail", true, q.compareTo(q2));
+        assertEquals(" testcompareTo  is fail", 0, q.compareTo(q2));
     }
 
 
 
     public void testequals() {
+        q.setKey("KEY");
+        q2.setKey("KEY");
+       assertTrue("NotEqual", q.equals(q2));
 
-        assertEquals(" testequals  is fail", false, q.equals(q2));
     }
 
 
 
+    /*
     public void testhashCode() {
-
+        Object one = q;
         assertEquals(" testhashCode   is fail", "", q.getKey().hashCode());
     }
-
+*/
 }
 
 
