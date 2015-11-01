@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">QuestionRoom</string>
-    <string name="title_activity_login">Question Room</string>
+    <string name="app_name">HKUSQroom</string>
+    <string name="title_activity_login">HKUSQroom</string>
 
     <!-- Strings related to login -->
     <string name="prompt_room_name">Room Name</string>
