@@ -115,9 +115,9 @@ public class MainActivity extends ListActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 boolean connected = (Boolean) dataSnapshot.getValue();
                 if (connected) {
-                    Toast.makeText(MainActivity.this, "Connected to Firebase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Connected to Firebase", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "Disconnected from Firebase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Disconnected from Firebase", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -136,6 +136,9 @@ public class MainActivity extends ListActivity {
     }
 
     private  String FoulLanguageFilter (String s){
+        if (s.length()==0){
+            Toast.makeText(MainActivity.this, "No Content ! ", Toast.LENGTH_LONG).show();
+        }
         String temp=s.toLowerCase();
         if(temp.matches(".*fuck.*")){
             temp = temp.replaceAll( "fuck" , "love");
@@ -164,19 +167,24 @@ public class MainActivity extends ListActivity {
         if(temp.matches(".*bitch.*")){
             temp = temp.replaceAll( "bitch" , "badgirl");
         }
-
-        temp = Character.toUpperCase(temp.charAt(0)) + temp.substring(1);
+        if(temp.length()>=2) {
+            temp = Character.toUpperCase(temp.charAt(0)) + temp.substring(1);
+        }
         return temp;
     }
 
     private void sendMessage() {
+
         EditText inputTitle = (EditText) findViewById(R.id.titleInput);
         EditText inputMsg = (EditText) findViewById(R.id.messageInput);
-
         String inputTitleText = inputTitle.getText().toString();
         String inputMsgText = inputMsg.getText().toString();
-        inputTitleText = Character.toUpperCase(inputTitleText.charAt(0)) + inputTitleText.substring(1);
-        inputMsgText = Character.toUpperCase(inputMsgText.charAt(0)) + inputMsgText.substring(1);
+        if (inputTitleText.length()>=2 ) {
+            inputTitleText = Character.toUpperCase(inputTitleText.charAt(0)) + inputTitleText.substring(1);
+        }
+        if (inputMsgText.length()>=2 ) {
+            inputMsgText = Character.toUpperCase(inputMsgText.charAt(0)) + inputMsgText.substring(1);
+        }
         String tempTitle = new String(inputTitleText);
         String tempMsg =   new String(inputMsgText);
         inputTitleText = FoulLanguageFilter(inputTitleText);
@@ -184,15 +192,15 @@ public class MainActivity extends ListActivity {
 
 
         if(   ! (tempTitle.equals(inputTitleText)) || !(tempMsg.equals(inputMsgText))) {
-            Toast.makeText(MainActivity.this, "Title/Content: No foul language Please", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Title/Content: No foul language Please", Toast.LENGTH_LONG).show();
         }
 
         if (!inputMsgText.equals("") && !inputTitleText.equals("")) {
             if(inputMsgText.length()<3 || inputTitleText.length()<3){
-                Toast.makeText(MainActivity.this, "Title/Content: too short", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Title/Content: too short", Toast.LENGTH_LONG).show();
             }else if(inputMsgText.length()>1024 || inputTitleText.length()>1024)
             {
-                Toast.makeText(MainActivity.this, "Title/Content: too long", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Title/Content: too long", Toast.LENGTH_LONG).show();
             }else {
                 // Create our 'model', a Chat object
                 Question question = new Question(inputTitleText, inputMsgText);
