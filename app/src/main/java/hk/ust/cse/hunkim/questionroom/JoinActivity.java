@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ArrayAdapter;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 
 import java.util.Arrays;
 
@@ -21,7 +23,7 @@ import hk.ust.cse.hunkim.questionroom.db.DBUtil;
 /**
  * A login screen that offers login via email/password.
  */
-public class JoinActivity extends Activity {
+public class JoinActivity extends ActionBarActivity {
     public static final String ROOM_NAME = "Room_name";
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -34,6 +36,12 @@ public class JoinActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
 
         // get the DB Helper
         DBHelper mDbHelper = new DBHelper(this);
